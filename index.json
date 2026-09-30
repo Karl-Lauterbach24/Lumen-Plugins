@@ -1,0 +1,51 @@
+{
+  "format": 1,
+  "name": "Lumen Plugins (official)",
+  "plugins": [
+    {
+      "id": "my-aacs-handler",
+      "name": "My AACS Plugin",
+      "version": "1.0.0",
+      "description": "Brings your own libaacs/libbdplus to libbluray, supplies DCP content keys from a key file (button: Refresh DCP Keys) and shows a Blu-ray notice on screen. Contains no decryption libraries: copy your own into the plugin's lib/ folder.",
+      "author": "Lumen Plugins",
+      "path": "plugins/my-aacs-handler",
+      "files": [
+        {
+          "path": "README.md",
+          "sha256": "e392dc5e3aa3bfb18efc60063e529f3934164fc967d386f6cf0a71a0b3f4c5b5"
+        },
+        {
+          "path": "plugin.json",
+          "sha256": "1501e53b9139736fa54a580a14dd57b499b2b3227110268b4ccd13a86e0956c1"
+        },
+        {
+          "path": "bin/windows/my_decrypt_plugin.dll",
+          "sha256": "f186a39114ea866ecd87f6a04e1448c1d046ee6e68f7dd14513c17bbedd8daa2",
+          "platform": "windows"
+        },
+        {
+          "path": "scripts/status.lua",
+          "sha256": "580b9c470e029b55a7b273f23ecad519ab8271ac331b61527283f5560808791a"
+        }
+      ]
+    },
+    {
+      "id": "osd-clock",
+      "name": "Clock on screen",
+      "version": "1.0.0",
+      "description": "mpv script plugin: Ctrl+T shows the time, the time remaining and when the film ends.",
+      "author": "Lumen Plugins",
+      "path": "plugins/osd-clock",
+      "files": [
+        {
+          "path": "plugin.json",
+          "sha256": "29f30b3118ae277205f36d5524001e0bd00c89415a4cbb6b4c7cc4f3d7bd4713"
+        },
+        {
+          "path": "scripts/clock.lua",
+          "sha256": "a4fd58301f7c6db5063327795b3781365978555f49a241082f0b245de0a3813a"
+        }
+      ]
+    }
+  ]
+}

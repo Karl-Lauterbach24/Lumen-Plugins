@@ -1,0 +1,10 @@
+{
+    "id": "osd-clock",
+    "name": "Clock on screen",
+    "version": "1.0.0",
+    "author": "Lumen Plugins",
+    "description": "mpv script plugin: Ctrl+T shows the time, the time remaining and when the film ends.",
+    "scripts": [
+        "scripts/clock.lua"
+    ]
+}

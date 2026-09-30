@@ -1,0 +1,54 @@
+# Native plugins for Windows, macOS and Linux -> plugins/<id>/bin/<platform>/, then index.json
+name: Build plugins
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ["index.json", "plugins/*/bin/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  native:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-15, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build
+        shell: bash
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release
+          # MSVC legt die DLL in einen Release-Unterordner
+          find plugins -path "*/bin/*" -type f -name "*.dll" -path "*/Release/*" -exec sh -c 'mv "$1" "$(dirname "$(dirname "$1")")/"' _ {} \;
+          find plugins -path "*/bin/*" -type d -name Release -exec rm -rf {} + || true
+          find plugins -path "*/bin/*" -type f \( -name "*.lib" -o -name "*.exp" -o -name "*.pdb" \) -delete
+          find plugins -path "*/bin/*" -type f
+      - uses: actions/upload-artifact@v5
+        with:
+          name: bin-${{ matrix.os }}
+          path: plugins/*/bin/
+
+  index:
+    needs: native
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/download-artifact@v5
+        with:
+          path: artifacts
+      - name: Collect binaries, rebuild index.json
+        run: |
+          for a in artifacts/*; do cp -r "$a"/. plugins/; done
+          python3 tools/build_index.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.json plugins/*/bin
+          if ! git diff --cached --quiet; then
+            git commit -m "Build native plugins and update index.json [skip ci]"
+            git push
+          fi
