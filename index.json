@@ -19,8 +19,18 @@
           "sha256": "1501e53b9139736fa54a580a14dd57b499b2b3227110268b4ccd13a86e0956c1"
         },
         {
+          "path": "bin/linux/my_decrypt_plugin.so",
+          "sha256": "eaacdc6f7252edd999dcb1482652a75873e9b9646cd9f6575be6cede28714193",
+          "platform": "linux"
+        },
+        {
+          "path": "bin/macos/my_decrypt_plugin.dylib",
+          "sha256": "5820d5fde6ce70c95104ae8d5b512a0e70d5a3409b032f5a35da0c9757977722",
+          "platform": "macos"
+        },
+        {
           "path": "bin/windows/my_decrypt_plugin.dll",
-          "sha256": "f186a39114ea866ecd87f6a04e1448c1d046ee6e68f7dd14513c17bbedd8daa2",
+          "sha256": "b2092d00b63846934f594df7395e41d4e0bb6c11bb410bba93315a77c37d4aef",
           "platform": "windows"
         },
         {
