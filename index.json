@@ -27,7 +27,7 @@
     {
       "id": "my-aacs-handler",
       "name": "My AACS Plugin",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "description": "Brings your own libaacs/libbdplus to libbluray, supplies DCP content keys from a key file (button: Refresh DCP Keys) and shows a Blu-ray notice on screen. Contains no decryption libraries: copy your own into the plugin's lib/ folder.",
       "author": "Lumen Plugins",
       "path": "plugins/my-aacs-handler",
@@ -38,12 +38,17 @@
         },
         {
           "path": "plugin.json",
-          "sha256": "1501e53b9139736fa54a580a14dd57b499b2b3227110268b4ccd13a86e0956c1"
+          "sha256": "4262a5f187d9cbf75fcb02fc4a8bd638b3c3bfaa6dfb57a3dde9838bb07fa264"
         },
         {
           "path": "bin/linux/my_decrypt_plugin.so",
           "sha256": "eaacdc6f7252edd999dcb1482652a75873e9b9646cd9f6575be6cede28714193",
           "platform": "linux"
+        },
+        {
+          "path": "bin/linux-arm64/my_decrypt_plugin.so",
+          "sha256": "a5a1cd3c97a47cab58bd005e7f0025d0842d81abeec14a7f738bc42fb9a273b7",
+          "platform": "linux-arm64"
         },
         {
           "path": "bin/macos/my_decrypt_plugin.dylib",
@@ -52,8 +57,13 @@
         },
         {
           "path": "bin/windows/my_decrypt_plugin.dll",
-          "sha256": "9057f4f04afc104ed761adeecb75e45ba68f564a435a6ecb10476d3fc6f14568",
+          "sha256": "fa31d140bcd5cadad3aecc4d93ab9651961cc444e0eaec423d46604d1fca6250",
           "platform": "windows"
+        },
+        {
+          "path": "bin/windows-arm64/my_decrypt_plugin.dll",
+          "sha256": "27276735ae1823c292f4c0fd3eec137d74f8247f6c93263060790eccf2ae11ae",
+          "platform": "windows-arm64"
         },
         {
           "path": "scripts/status.lua",
