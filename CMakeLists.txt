@@ -3,13 +3,27 @@
 cmake_minimum_required(VERSION 3.16)
 project(LumenPlugins C)
 
+# Output folder per platform. Without an architecture suffix: Windows/Linux x64 and
+# macOS universal (build with -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"); ARM64 builds
+# for Windows and Linux go to "<os>-arm64" (needs Lumen 1.0 or newer).
+if(CMAKE_GENERATOR_PLATFORM)
+    set(_arch "${CMAKE_GENERATOR_PLATFORM}")
+else()
+    set(_arch "${CMAKE_SYSTEM_PROCESSOR}")
+endif()
+if(_arch MATCHES "^(ARM64|arm64|aarch64)$")
+    set(_suffix "-arm64")
+else()
+    set(_suffix "")
+endif()
 if(WIN32)
-    set(PLATFORM windows)
+    set(PLATFORM "windows${_suffix}")
 elseif(APPLE)
     set(PLATFORM macos)
 else()
-    set(PLATFORM linux)
+    set(PLATFORM "linux${_suffix}")
 endif()
+message(STATUS "Lumen plugins: output folder bin/${PLATFORM}")
 
 function(lumen_native_plugin id name)
     add_library(${name} MODULE ${ARGN})

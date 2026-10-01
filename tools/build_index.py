@@ -4,7 +4,8 @@
     python tools/build_index.py
 
 Every file of a plugin is listed with its SHA-256 sum; files below bin/<platform>/
-are marked with that platform (windows, macos, linux) and only installed there.
+are marked with that platform (windows, macos, linux, windows-arm64, linux-arm64) and only
+installed there. "windows" and "linux" mean x64, "macos" a universal library.
 Hidden files, sources (src/) and READMEs of the repository itself are not part of
 an installation, the plugin's README.md is.
 """
@@ -14,7 +15,7 @@ import os
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PLATFORMS = ("windows", "macos", "linux")
+PLATFORMS = ("windows", "macos", "linux", "windows-arm64", "linux-arm64")
 
 
 def main():

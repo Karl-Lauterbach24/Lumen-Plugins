@@ -14,14 +14,15 @@ jobs:
   native:
     strategy:
       matrix:
-        os: [windows-latest, macos-15, ubuntu-latest]
+        os: [windows-latest, windows-11-arm, macos-15, ubuntu-latest, ubuntu-24.04-arm]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v5
       - name: Build
         shell: bash
         run: |
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          # macOS: one library for Apple Silicon and Intel
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
           cmake --build build --config Release
           # MSVC legt die DLL in einen Release-Unterordner
           find plugins -path "*/bin/*" -type f -name "*.dll" -path "*/Release/*" -exec sh -c 'mv "$1" "$(dirname "$(dirname "$1")")/"' _ {} \;
