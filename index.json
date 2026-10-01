@@ -3,6 +3,28 @@
   "name": "Lumen Plugins (official)",
   "plugins": [
     {
+      "id": "disc-identify",
+      "name": "Disc identification",
+      "version": "1.0.0",
+      "description": "Names the disc you insert. Audio CDs: album, artist, year, track names and cover from MusicBrainz. DVD, Blu-ray and Video CD: film title and year from the disc label via Wikidata. Sends the CD's disc ID or the disc label to these services. Needs Lumen 0.2.1 or newer.",
+      "author": "Lumen Plugins",
+      "path": "plugins/disc-identify",
+      "files": [
+        {
+          "path": "README.md",
+          "sha256": "4827feed0b18923dc55fcd0a029383e9b771aed5f8b9a955c21ec85c6ef46a00"
+        },
+        {
+          "path": "plugin.json",
+          "sha256": "85a58d0d61820dadcf580fec4fd5f736c07b7758a5c7c2ca7a496fc7682a758c"
+        },
+        {
+          "path": "scripts/identify.lua",
+          "sha256": "428df8300213bb295c0153e3bdf5b5cd819ec7e7a4eb10b55eab93feaa608cc1"
+        }
+      ]
+    },
+    {
       "id": "my-aacs-handler",
       "name": "My AACS Plugin",
       "version": "1.0.0",
@@ -30,7 +52,7 @@
         },
         {
           "path": "bin/windows/my_decrypt_plugin.dll",
-          "sha256": "b2092d00b63846934f594df7395e41d4e0bb6c11bb410bba93315a77c37d4aef",
+          "sha256": "9057f4f04afc104ed761adeecb75e45ba68f564a435a6ecb10476d3fc6f14568",
           "platform": "windows"
         },
         {
