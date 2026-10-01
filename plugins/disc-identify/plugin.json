@@ -1,0 +1,10 @@
+{
+    "id": "disc-identify",
+    "name": "Disc identification",
+    "version": "1.0.0",
+    "author": "Lumen Plugins",
+    "description": "Names the disc you insert. Audio CDs: album, artist, year, track names and cover from MusicBrainz. DVD, Blu-ray and Video CD: film title and year from the disc label via Wikidata. Sends the CD's disc ID or the disc label to these services. Needs Lumen 0.2.1 or newer.",
+    "scripts": [
+        "scripts/identify.lua"
+    ]
+}
