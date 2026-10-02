@@ -57,7 +57,7 @@
         },
         {
           "path": "bin/windows/my_decrypt_plugin.dll",
-          "sha256": "fa31d140bcd5cadad3aecc4d93ab9651961cc444e0eaec423d46604d1fca6250",
+          "sha256": "cd9c2ab12434030e2ea911e2421600a9444ac332d390a07fece5755ca4422cd2",
           "platform": "windows"
         },
         {
