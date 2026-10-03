@@ -27,42 +27,42 @@
     {
       "id": "my-aacs-handler",
       "name": "My AACS Plugin",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "description": "Plays encrypted Blu-rays with your MakeMKV installation (nothing to set up) or with your own libaacs/libbdplus from the plugin's lib/ folder; drop your KEYDB.cfg onto the Lumen window to install the AACS keys. Also supplies DCP content keys from dcp-keys.txt. Contains no decryption software and no keys. Setup: button Instructions.",
       "author": "Lumen Plugins",
       "path": "plugins/my-aacs-handler",
       "files": [
         {
           "path": "README.md",
-          "sha256": "e45a2a4ed7bc9a948d7720fc784f8b0d23e86860c1b894a3129aca8a4243bf63"
+          "sha256": "216782368340b7562cdab58842b098cdf9abc11537d019f077b18b2ec3973408"
         },
         {
           "path": "plugin.json",
-          "sha256": "823cf025f94d0f8b2c9188dd4218d2f3f184d0b12770746f45bd475a2d3fa6d9"
+          "sha256": "40dc352ea6c4c711d2a721ec6aefcae54abd16285e0a184e4b71e20be253ee4a"
         },
         {
           "path": "bin/linux/my_decrypt_plugin.so",
-          "sha256": "97d43d1b5d347587b42a4c7466587698748e747f042a2e758879fa88ec485854",
+          "sha256": "b0b8b392b8e3129808fb5a4fc3bd62c0c1aff8ce5b97eba8b7e9c9accf1e51c0",
           "platform": "linux"
         },
         {
           "path": "bin/linux-arm64/my_decrypt_plugin.so",
-          "sha256": "953e9b04185e01709153f8b95529c69c28c1214fb80a0e2b1abd25a76f44cde0",
+          "sha256": "ac2229b3e57511c7cc938bfd3f90769c4c50da1d6b6f24b5dfbe3470085e88a2",
           "platform": "linux-arm64"
         },
         {
           "path": "bin/macos/my_decrypt_plugin.dylib",
-          "sha256": "8af359a9e02d67e7c58479c13ccdd7e73b4976fbc6bb85021baa284a155a30a7",
+          "sha256": "5a49103cefefb178ec9673de77125e95094782b4c50aad8d12199838b30064cb",
           "platform": "macos"
         },
         {
           "path": "bin/windows/my_decrypt_plugin.dll",
-          "sha256": "6e80abc578c58e054c3e1a4d1eda2b57da933bbf2b438a5c7a5f3b3ab98ad544",
+          "sha256": "d2b0cb2875399234340508a062cbc0f6327a3775a5f840514e31f49e12aa91ca",
           "platform": "windows"
         },
         {
           "path": "bin/windows-arm64/my_decrypt_plugin.dll",
-          "sha256": "092c052014c22e87967011b56ab7bcf75874b359ecdf5fbb080a249f0db06be7",
+          "sha256": "6b33be342b27a56f4e4ccd0f7520737045a7003c21e675b36a4ce888d05fe10b",
           "platform": "windows-arm64"
         },
         {
