@@ -8,14 +8,14 @@ Lumen reads [`index.json`](index.json) from this repository. Find the store unde
 
 | Plugin | Kind | Description |
 |--------|------|-------------|
-| [My AACS Plugin](plugins/my-aacs-handler) | disc libraries + native + mpv script | Your own libaacs/libbdplus for libbluray, DCP keys from a key file, a Blu-ray notice on screen |
+| [My AACS Plugin](plugins/my-aacs-handler) | disc libraries + native + mpv script | Encrypted Blu-rays with your MakeMKV installation or your own libaacs/libbdplus, `KEYDB.cfg` by drag and drop, DCP keys from a key file, a Blu-ray notice on screen |
 | [Clock on screen](plugins/osd-clock) | mpv script | Ctrl+T shows the clock, time remaining and when the film ends |
 | [Disc identification](plugins/disc-identify) | mpv script | Names the disc you insert: audio CDs with album, artist, year, cover and track names (MusicBrainz), video discs with film title and year (Wikidata). Needs Lumen 0.2.1 |
 
 <p align="center"><img src="docs/disc-identify.png" width="720" alt="An audio CD identified by the Disc identification plugin: album name and track names as chapters"></p>
 
 > This repository contains **no** copy-protection circumvention (no libaacs, libbdplus or libdvdcss).
-> Plugins such as *My AACS Plugin* only load libraries that you add yourself.
+> Plugins such as *My AACS Plugin* only use what you provide yourself: your libraries, your MakeMKV installation, your key files.
 
 ## Your own store
 
