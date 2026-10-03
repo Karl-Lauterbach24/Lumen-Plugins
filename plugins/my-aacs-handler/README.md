@@ -18,7 +18,8 @@ You are responsible for making sure that using such software and keys is legal w
 
 ### A) MakeMKV
 
-1. Install [MakeMKV](https://www.makemkv.com/) and start it once, so that it is registered or its trial period runs.
+1. Install [MakeMKV](https://www.makemkv.com/) and open a disc in MakeMKV itself once. MakeMKV must be registered or
+   in its trial period, and it does not begin the trial when another program asks for a disc.
 2. In Lumen, click **Refresh** on the plugin (or restart Lumen).
 
 The status then reads `Blu-ray: MakeMKV (…)`. There is nothing else to set up, and no key file is needed: MakeMKV
@@ -76,6 +77,16 @@ the next disc you open, no restart needed.
 
 Updating the plugin from the store replaces the plugin folder: copy your libraries into `lib/` again afterwards.
 `KEYDB.cfg`, `settings.txt` and `dcp-keys.txt` are not touched by an update.
+
+### If a disc does not open
+
+Lumen's *Titles* tab shows what libbluray reports for the disc, for example `AACS · error -1`.
+
+- **MakeMKV** (status `Blu-ray: MakeMKV`): open the disc in MakeMKV itself. What MakeMKV can't open there, it can't
+  open for Lumen: trial period not started or over, key expired, a drive it can't use. Lumen started from a terminal
+  with `MMBD_TRACE=1` in the environment prints MakeMKV's own messages.
+- **Your own libaacs**: the disc needs an entry in your `KEYDB.cfg`, or keys in it that still work with this disc and
+  your drive. With `BD_DEBUG_MASK=0x858` in the environment, libbluray and libaacs print what they try.
 
 ## DCP keys
 

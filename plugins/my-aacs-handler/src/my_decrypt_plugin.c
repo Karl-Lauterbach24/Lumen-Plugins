@@ -536,10 +536,12 @@ static void load_keys(state *st)
 
 static void status_text(state *st, char *out, size_t size)
 {
-    char keydb[PATH_LEN + 16], bluray[PATH_LEN + 160];
+    char keydb[PATH_LEN + 16], bluray[PATH_LEN + 256];
     if (st->using_mmbd) {
-        /* MakeMKV brings its own keys */
-        snprintf(bluray, sizeof bluray, "Blu-ray: MakeMKV (%s)", st->mmbd);
+        /* MakeMKV brings its own keys, but decides itself whether it opens a disc for Lumen */
+        snprintf(bluray, sizeof bluray,
+                 "Blu-ray: MakeMKV (%s). A disc does not open? Open it in MakeMKV itself: "
+                 "MakeMKV must be registered or in its trial period", st->mmbd);
     } else {
         const char *makemkv = !st->mmbd[0] ? "MakeMKV not found" : st->makemkv == MAKEMKV_OFF ? "MakeMKV switched off" : "MakeMKV not used";
         keydb_dir(keydb, PATH_LEN);
@@ -568,7 +570,8 @@ static void show_instructions(state *st)
     snprintf(text, sizeof text,
              "Encrypted Blu-rays need one of these two:\n"
              "\n"
-             "A) MakeMKV. Install MakeMKV and start it once, so that it is registered or its trial runs. "
+             "A) MakeMKV. Install MakeMKV and open a disc in MakeMKV itself once: it must be registered or in its "
+             "trial period, and it does not begin the trial when another program asks. "
              "Click Refresh: the status then says \"Blu-ray: MakeMKV\". Nothing else to set up, no key file needed. "
              "Installed in an unusual place? Enter it as makemkv_path in %s" SEP "settings.txt.\n"
              "\n"
