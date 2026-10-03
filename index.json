@@ -27,47 +27,47 @@
     {
       "id": "my-aacs-handler",
       "name": "My AACS Plugin",
-      "version": "1.1.0",
-      "description": "Brings your own libaacs/libbdplus to libbluray, supplies DCP content keys from a key file (button: Refresh DCP Keys) and shows a Blu-ray notice on screen. Contains no decryption libraries: copy your own into the plugin's lib/ folder.",
+      "version": "1.2.0",
+      "description": "Plays encrypted Blu-rays with your MakeMKV installation (nothing to set up) or with your own libaacs/libbdplus from the plugin's lib/ folder; drop your KEYDB.cfg onto the Lumen window to install the AACS keys. Also supplies DCP content keys from dcp-keys.txt. Contains no decryption software and no keys. Setup: button Instructions.",
       "author": "Lumen Plugins",
       "path": "plugins/my-aacs-handler",
       "files": [
         {
           "path": "README.md",
-          "sha256": "e392dc5e3aa3bfb18efc60063e529f3934164fc967d386f6cf0a71a0b3f4c5b5"
+          "sha256": "e45a2a4ed7bc9a948d7720fc784f8b0d23e86860c1b894a3129aca8a4243bf63"
         },
         {
           "path": "plugin.json",
-          "sha256": "4262a5f187d9cbf75fcb02fc4a8bd638b3c3bfaa6dfb57a3dde9838bb07fa264"
+          "sha256": "823cf025f94d0f8b2c9188dd4218d2f3f184d0b12770746f45bd475a2d3fa6d9"
         },
         {
           "path": "bin/linux/my_decrypt_plugin.so",
-          "sha256": "eaacdc6f7252edd999dcb1482652a75873e9b9646cd9f6575be6cede28714193",
+          "sha256": "97d43d1b5d347587b42a4c7466587698748e747f042a2e758879fa88ec485854",
           "platform": "linux"
         },
         {
           "path": "bin/linux-arm64/my_decrypt_plugin.so",
-          "sha256": "a5a1cd3c97a47cab58bd005e7f0025d0842d81abeec14a7f738bc42fb9a273b7",
+          "sha256": "953e9b04185e01709153f8b95529c69c28c1214fb80a0e2b1abd25a76f44cde0",
           "platform": "linux-arm64"
         },
         {
           "path": "bin/macos/my_decrypt_plugin.dylib",
-          "sha256": "5820d5fde6ce70c95104ae8d5b512a0e70d5a3409b032f5a35da0c9757977722",
+          "sha256": "8af359a9e02d67e7c58479c13ccdd7e73b4976fbc6bb85021baa284a155a30a7",
           "platform": "macos"
         },
         {
           "path": "bin/windows/my_decrypt_plugin.dll",
-          "sha256": "cd9c2ab12434030e2ea911e2421600a9444ac332d390a07fece5755ca4422cd2",
+          "sha256": "6e80abc578c58e054c3e1a4d1eda2b57da933bbf2b438a5c7a5f3b3ab98ad544",
           "platform": "windows"
         },
         {
           "path": "bin/windows-arm64/my_decrypt_plugin.dll",
-          "sha256": "27276735ae1823c292f4c0fd3eec137d74f8247f6c93263060790eccf2ae11ae",
+          "sha256": "092c052014c22e87967011b56ab7bcf75874b359ecdf5fbb080a249f0db06be7",
           "platform": "windows-arm64"
         },
         {
           "path": "scripts/status.lua",
-          "sha256": "580b9c470e029b55a7b273f23ecad519ab8271ac331b61527283f5560808791a"
+          "sha256": "a073da87e06232dc7fd0edaa207de783609d6a0c4f7b3625393d575bba3687be"
         }
       ]
     },
