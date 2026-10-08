@@ -172,9 +172,11 @@ local function store_key(key)
     end
     local line = 'app_Key = "' .. key .. '"'
     local n
-    text, n = text:gsub('([\r\n])[ \t]*app_Key[ \t]*=[ \t]*"[^"\r\n]*"', function(nl) return nl .. line end, 1)
+    -- a line break in front, so that the pattern also finds the key in the file's first line
+    text, n = ("\n" .. text):gsub('([\r\n])[ \t]*app_Key[ \t]*=[ \t]*"[^"\r\n]*"', function(nl) return nl .. line end, 1)
+    text = text:sub(2)
     if n == 0 then
-        if text:sub(-1) ~= "\n" then text = text .. "\n" end
+        if text ~= "" and text:sub(-1) ~= "\n" then text = text .. "\n" end
         text = text .. line .. "\n"
     end
     return write_file(file, text)
