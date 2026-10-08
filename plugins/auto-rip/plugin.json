@@ -1,0 +1,10 @@
+{
+    "id": "auto-rip",
+    "name": "Auto rip",
+    "version": "1.0.0",
+    "author": "Lumen Plugins",
+    "description": "Copies disc after disc to MKV with your MakeMKV installation: the main feature of a film or the episodes of a series, named and filed for Jellyfin, Plex, Emby and Kodi (Movies/Title (Year)/…, Shows/Series/Season 01/Series S01E01.mkv). When a disc is done it is ejected and the next one you insert is copied. Runs only after you press Start auto rip; otherwise Lumen plays discs as usual. Contains no decryption software. Looks up title and year on Wikidata (sends the disc's name; can be switched off). Needs Lumen 1.4 or newer and MakeMKV.",
+    "scripts": [
+        "scripts/autorip.lua"
+    ]
+}

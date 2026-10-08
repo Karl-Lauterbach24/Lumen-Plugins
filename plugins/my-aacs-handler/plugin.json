@@ -1,9 +1,9 @@
 {
     "id": "my-aacs-handler",
     "name": "My AACS Plugin",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "author": "Lumen Plugins",
-    "description": "Plays encrypted Blu-rays with your MakeMKV installation (nothing to set up) or with your own libaacs/libbdplus from the plugin's lib/ folder; drop your KEYDB.cfg onto the Lumen window to install the AACS keys. Also supplies DCP content keys from dcp-keys.txt. Contains no decryption software and no keys. Setup: button Instructions.",
+    "description": "Plays encrypted Blu-rays with MakeMKV (button Install MakeMKV downloads and installs it; its beta key is kept current, a key you bought is never touched) or with your own libaacs/libbdplus from the plugin's lib/ folder; drop your KEYDB.cfg onto the Lumen window to install the AACS keys. Also supplies DCP content keys from dcp-keys.txt. Contains no decryption software and no keys. Setup: button Instructions. The MakeMKV buttons need Lumen 1.4 or newer.",
     "library": {
         "windows": "bin/windows/my_decrypt_plugin.dll",
         "windows-arm64": "bin/windows-arm64/my_decrypt_plugin.dll",
@@ -11,7 +11,10 @@
         "linux": "bin/linux/my_decrypt_plugin.so",
         "linux-arm64": "bin/linux-arm64/my_decrypt_plugin.so"
     },
-    "scripts": ["scripts/status.lua"],
+    "scripts": [
+        "scripts/status.lua",
+        "scripts/makemkv.lua"
+    ],
     "discLibraries": {
         "aacs": {
             "windows": "lib/libaacs-0.dll",
