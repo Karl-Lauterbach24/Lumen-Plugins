@@ -142,6 +142,7 @@ local DEFAULTS = {
     { "movies_folder", "Movies", "Sub-folder for films: <output>/Movies/Title (Year)/Title (Year).mkv" },
     { "shows_folder", "Shows", "Sub-folder for series: <output>/Shows/Series/Season 01/Series S01E01.mkv" },
     { "mode", "auto", "auto = decide per disc, movie = always the main feature, episodes = always all episodes" },
+    { "keep_3d", "yes", "Blu-ray 3D: copy both views (plays in 3D in Lumen, in 2D elsewhere). no = MakeMKV's own choice: the 2D view." },
     { "min_length", "120", "Seconds. Shorter titles (logos, trailers) are never looked at." },
     { "episode_min", "15", "Minutes. Episodes of a series are at least this long …" },
     { "episode_max", "75", "… and at most this long." },
@@ -512,7 +513,7 @@ local function plan_targets(disc, plan, id)
     local film = safe_name(id.title)
     if id.year ~= "" then film = film .. " (" .. id.year .. ")" end
     -- several versions of a film side by side: "Film (2019) - 4K.mkv" next to "Film (2019).mkv"
-    local version = t.uhd and " - 4K" or (t.is3d and " - 3D" or "")
+    local version = t.uhd and " - 4K" or (t.is3d and settings.keep_3d ~= "no" and " - 3D" or "")
     targets[1] = { title = t, dir = join(join(root, settings.movies_folder), film), base = film .. version }
     return targets, film .. version
 end
@@ -545,7 +546,7 @@ end
 -- the job's working folder: script, log, process id; a failed copy leaves its partial file there
 local function clean_up(j)
     if not j or not j.tmp then return end
-    for _, name in ipairs({ "rip.sh", "rip.cmd", "makemkv.log", "makemkv.pid" }) do os.remove(join(j.tmp, name)) end
+    for _, name in ipairs({ "rip.sh", "rip.cmd", "makemkv.log", "makemkv.pid", "3d.mmcp.xml" }) do os.remove(join(j.tmp, name)) end
     for _, name in ipairs(utils.readdir(j.tmp, "dirs") or {}) do
         for _, file in ipairs(utils.readdir(join(j.tmp, name), "files") or {}) do os.remove(join(join(j.tmp, name), file)) end
         os.remove(join(j.tmp, name))
@@ -568,6 +569,23 @@ local function finish_disc(ok, text)
     end
 end
 
+-- MakeMKV leaves out the second view of a Blu-ray 3D unless it is told otherwise (its selection rule
+-- says "-sel:mvcvideo"), and makemkvcon takes no selection on its command line. A conversion profile
+-- can extend the rule: this one is MakeMKV's default profile (copy as is, LPCM as before) with the
+-- user's own selection rule plus the second view.
+local PROFILE_3D = [[<?xml version="1.0" encoding="utf-8"?>
+<profile>
+    <name lang="eng">Lumen auto rip 3D</name>
+    <mkvSettings ignoreForcedSubtitlesFlag="true" useISO639Type2T="false" setFirstAudioTrackAsDefault="true" setFirstSubtitleTrackAsDefault="true" setFirstForcedSubtitleTrackAsDefault="true" insertFirstChapter00IfMissing="true"/>
+    <outputSettings name="copy" outputFormat="directCopy"><description lang="eng">Copy track as is</description></outputSettings>
+    <outputSettings name="lpcm" outputFormat="LPCM-raw"><description lang="eng">Save as raw LPCM</description></outputSettings>
+    <outputSettings name="wavex" outputFormat="LPCM-wavex"><description lang="eng">Save as LPCM in WAV container</description></outputSettings>
+    <trackSettings input="default"><output outputSettingsName="copy" defaultSelection="$app_DefaultSelectionString,+sel:mvcvideo"></output></trackSettings>
+    <trackSettings input="LPCM-stereo"><output outputSettingsName="lpcm" defaultSelection="$app_DefaultSelectionString,+sel:mvcvideo"></output></trackSettings>
+    <trackSettings input="LPCM-multi"><output outputSettingsName="wavex" defaultSelection="$app_DefaultSelectionString,+sel:mvcvideo"></output></trackSettings>
+</profile>
+]]
+
 -- makemkvcon runs on its own (it outlives a restart of the player's video engine) and writes its
 -- progress to a file that a timer reads
 local function start_title(n)
@@ -582,12 +600,18 @@ local function start_title(n)
     os.remove(log)
     os.remove(pid)
     local min = tostring(tonumber(settings.min_length) or 120)
+    local profile
+    if target.title.is3d and settings.keep_3d ~= "no" then
+        profile = join(job.tmp, "3d.mmcp.xml")
+        if not write_file(profile, PROFILE_3D) then profile = nil end
+    end
     local script
     if WINDOWS then
         script = join(job.tmp, "rip.cmd")
         write_file(script, table.concat({
             "@echo off", "chcp 65001 > nul",
-            string.format('"%s" -r --progress=-same --minlength=%s mkv disc:%d %d "%s" > "%s" 2>&1', job.makemkvcon, min,
+            string.format('"%s" -r --progress=-same%s --minlength=%s mkv disc:%d %d "%s" > "%s" 2>&1', job.makemkvcon,
+                          profile and (' --profile="' .. profile .. '"') or "", min,
                           job.drive.index, target.title.id, tmp, log),
             string.format('echo EXIT:%%ERRORLEVEL%%>> "%s"', log), "" }, "\r\n"))
         mp.command_native_async({ name = "subprocess", args = { "cmd.exe", "/c", script }, playback_only = false,
@@ -596,7 +620,8 @@ local function start_title(n)
         script = join(job.tmp, "rip.sh")
         write_file(script, table.concat({
             "#!/bin/sh",
-            string.format("%s -r --progress=-same --minlength=%s mkv disc:%d %d %s > %s 2>&1 &", sh(job.makemkvcon), min,
+            string.format("%s -r --progress=-same%s --minlength=%s mkv disc:%d %d %s > %s 2>&1 &", sh(job.makemkvcon),
+                          profile and (" --profile=" .. sh(profile)) or "", min,
                           job.drive.index, target.title.id, sh(tmp), sh(log)),
             string.format("echo $! > %s", sh(pid)), "wait $!", string.format('echo "EXIT:$?" >> %s', sh(log)), "" }, "\n"))
         mp.command_native_async({ name = "subprocess", args = { "/bin/sh", script }, playback_only = false,
@@ -673,7 +698,7 @@ local function copy_disc(makemkvcon, drive)
             finish_disc(false, "Nothing to copy on this disc: no title is longer than " .. settings.min_length .. " seconds")
             return
         end
-        status("Looking up “" .. (disc.name ~= "" and disc.name or disc.label) .. "” …")
+        if settings.lookup == "yes" then status("Looking up “" .. (disc.name ~= "" and disc.name or disc.label) .. "” …") end
         identify(disc, plan.mode == "episodes", function(id)
             if not armed or not job or job.drive ~= drive then return end
             local root = output_root()

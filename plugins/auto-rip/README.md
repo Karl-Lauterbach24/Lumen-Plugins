@@ -57,6 +57,7 @@ Button **Settings** opens the folder with `settings.txt` (restart Lumen after a 
 | `output` | *(see above)* | Folder for the copies |
 | `movies_folder`, `shows_folder` | `Movies`, `Shows` | Sub-folders |
 | `mode` | `auto` | `auto`, `movie` (always the main feature) or `episodes` (always all episodes) |
+| `keep_3d` | `yes` | Blu-ray 3D: copy both views. `no` = MakeMKV's own choice, the 2D view |
 | `min_length` | `120` | Seconds; shorter titles are never looked at |
 | `episode_min`, `episode_max` | `15`, `75` | Minutes; how long an episode is |
 | `eject` | `yes` | Eject the disc when it is done |
@@ -69,6 +70,10 @@ Button **Settings** opens the folder with `settings.txt` (restart Lumen after a 
   You need as much free space as the film is large (25–90 GB).
 - The copy is exactly what is on the disc (no re-encoding): all sound tracks and subtitles MakeMKV selects
   by default.
+- **Blu-ray 3D:** MakeMKV by itself leaves out the second view. Auto rip adds it (a conversion profile for
+  this one copy: MakeMKV's default profile with your selection rule plus `+sel:mvcvideo`), and the file is
+  named `… - 3D.mkv`. It plays in 3D in Lumen and in 2D in players that know no 3D. With `keep_3d = no` the
+  copy is 2D and carries no `- 3D`.
 - If a disc cannot be copied, the status line says what MakeMKV reported, the disc stays in the drive,
   and auto rip waits for the next one.
 - Stopping during a copy ends MakeMKV and removes the unfinished file.
