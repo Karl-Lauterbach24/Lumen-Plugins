@@ -8,6 +8,7 @@ Plays encrypted Blu-rays in Lumen with software **you** already have: your MakeM
 | Disc libraries | `plugin.json` → `discLibraries` | Makes **your own** `libaacs` / `libbdplus` available to libbluray. Both are marked `optional`, so the rest of the plugin also works without them. |
 | Native C plugin | `src/my_decrypt_plugin.c` → `bin/<platform>/` | Finds MakeMKV and points libbluray at it, installs a `KEYDB.cfg` you drop onto the Lumen window, supplies DCP content keys from `dcp-keys.txt`. Buttons: **Refresh**, **MakeMKV on/off**, **Instructions**. |
 | mpv script | `scripts/status.lua` | Passes a dropped `KEYDB.cfg` to the native part. Shows a Blu-ray notice with the disc title when a Blu-ray starts. |
+| mpv script | `scripts/makemkv.lua` (needs Lumen 1.4) | Buttons **Install MakeMKV** / **Update MakeMKV** and **Update beta key**; keeps MakeMKV's beta key current. |
 
 Enable the plugin in the *Plugins* tab and restart Lumen. The line under the plugin's description shows what is used
 for Blu-rays. The button **Instructions** shows the steps below with the folders of your system.
@@ -18,9 +19,40 @@ You are responsible for making sure that using such software and keys is legal w
 
 ### A) MakeMKV
 
-1. Install [MakeMKV](https://www.makemkv.com/) and open a disc in MakeMKV itself once. MakeMKV must be registered or
-   in its trial period, and it does not begin the trial when another program asks for a disc.
-2. In Lumen, click **Refresh** on the plugin (or restart Lumen).
+1. Click **Install MakeMKV** on the plugin (Lumen 1.4 or newer), or install [MakeMKV](https://www.makemkv.com/)
+   yourself.
+2. MakeMKV must be registered: the plugin enters MakeMKV's current beta key for you (below). With a key you bought,
+   or to begin the trial period instead, open a disc in MakeMKV itself once – MakeMKV does not begin the trial when
+   another program asks for a disc.
+3. In Lumen, click **Refresh** on the plugin (or restart Lumen).
+
+#### Install MakeMKV
+
+MakeMKV is shareware by GuinpinSoft, free to use while it is in beta. The first click on the button says so and
+names its licence (<https://www.makemkv.com/eula>); the second click goes ahead:
+
+- the plugin asks makemkv.com for the current version, downloads it from there and compares the file with the
+  SHA-256 list published on the same site;
+- **macOS:** `MakeMKV.app` is copied into `/Applications` (or `Applications` in your home folder if you may not write
+  there);
+- **Windows:** MakeMKV's own installer runs silently; Windows asks for permission once;
+- **Linux:** MakeMKV has no installer there. The plugin builds it from the two official packages into its settings
+  folder (`…/config/my-aacs-handler/makemkv`), without administrator rights. It needs a C++ compiler, `make`,
+  `pkg-config` and the development files of OpenSSL, expat, zlib and FFmpeg; if something is missing, the status line
+  names the command that installs it for your distribution. The Linux build has not been tried on a Linux computer
+  yet.
+
+With MakeMKV already installed the button reads **Update MakeMKV** and does the same with the current version.
+
+#### The beta key
+
+While MakeMKV is in beta its author publishes a key in the
+[MakeMKV forum](https://forum.makemkv.com/forum/viewtopic.php?f=5&t=1053) that registers it until the end of the
+following month. Once a day – and when you click **Update beta key** – the plugin reads that page and, **if MakeMKV
+has no key or a beta key** (`T-…`), enters the current one (`~/Library/MakeMKV/settings.conf` on macOS,
+`~/.MakeMKV/settings.conf` on Linux, MakeMKV's registry key on Windows). A key you bought is never touched. To switch
+this off, put `beta_key = off` into `makemkv.txt` in the plugin's settings folder. If you use MakeMKV regularly,
+consider buying it.
 
 The status then reads `Blu-ray: MakeMKV (…)`. There is nothing else to set up, and no key file is needed: MakeMKV
 brings its own keys and also handles BD+.

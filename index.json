@@ -3,6 +3,28 @@
   "name": "Lumen Plugins (official)",
   "plugins": [
     {
+      "id": "auto-rip",
+      "name": "Auto rip",
+      "version": "1.0.0",
+      "description": "Copies disc after disc to MKV with your MakeMKV installation: the main feature of a film or the episodes of a series, named and filed for Jellyfin, Plex, Emby and Kodi (Movies/Title (Year)/…, Shows/Series/Season 01/Series S01E01.mkv). When a disc is done it is ejected and the next one you insert is copied. Runs only after you press Start auto rip; otherwise Lumen plays discs as usual. Contains no decryption software. Looks up title and year on Wikidata (sends the disc's name; can be switched off). Needs Lumen 1.4 or newer and MakeMKV.",
+      "author": "Lumen Plugins",
+      "path": "plugins/auto-rip",
+      "files": [
+        {
+          "path": "README.md",
+          "sha256": "79aa740fb4e6a76fd62b92a8c8ff89976b480dc32d12fc506da64454e49f199e"
+        },
+        {
+          "path": "plugin.json",
+          "sha256": "272336caa7c8db63358ae4b5a6d596db2ef35eda9cd4529ea48b411cad02b777"
+        },
+        {
+          "path": "scripts/autorip.lua",
+          "sha256": "fceb22281d072c2bbe866fa782258ce0ed6117a83d2a8288df1e5647393ff16d"
+        }
+      ]
+    },
+    {
       "id": "disc-identify",
       "name": "Disc identification",
       "version": "1.0.0",
@@ -27,18 +49,18 @@
     {
       "id": "my-aacs-handler",
       "name": "My AACS Plugin",
-      "version": "1.2.1",
-      "description": "Plays encrypted Blu-rays with your MakeMKV installation (nothing to set up) or with your own libaacs/libbdplus from the plugin's lib/ folder; drop your KEYDB.cfg onto the Lumen window to install the AACS keys. Also supplies DCP content keys from dcp-keys.txt. Contains no decryption software and no keys. Setup: button Instructions.",
+      "version": "1.3.0",
+      "description": "Plays encrypted Blu-rays with MakeMKV (button Install MakeMKV downloads and installs it; its beta key is kept current, a key you bought is never touched) or with your own libaacs/libbdplus from the plugin's lib/ folder; drop your KEYDB.cfg onto the Lumen window to install the AACS keys. Also supplies DCP content keys from dcp-keys.txt. Contains no decryption software and no keys. Setup: button Instructions. The MakeMKV buttons need Lumen 1.4 or newer.",
       "author": "Lumen Plugins",
       "path": "plugins/my-aacs-handler",
       "files": [
         {
           "path": "README.md",
-          "sha256": "216782368340b7562cdab58842b098cdf9abc11537d019f077b18b2ec3973408"
+          "sha256": "e3793ea73e29ea1cd9ff5b4c80dd7e863fe43ffb6cd08f0fedbcc8708545c582"
         },
         {
           "path": "plugin.json",
-          "sha256": "40dc352ea6c4c711d2a721ec6aefcae54abd16285e0a184e4b71e20be253ee4a"
+          "sha256": "f228d959ac61033b7ae338ff7474e98cc520cb03894ecdeaaea7e6f2719f7871"
         },
         {
           "path": "bin/linux/my_decrypt_plugin.so",
@@ -64,6 +86,14 @@
           "path": "bin/windows-arm64/my_decrypt_plugin.dll",
           "sha256": "6b33be342b27a56f4e4ccd0f7520737045a7003c21e675b36a4ce888d05fe10b",
           "platform": "windows-arm64"
+        },
+        {
+          "path": "scripts/build-makemkv-linux.sh",
+          "sha256": "78f47bd983fd76a8e93f442c061f1c8dc01d2fb444aa660035730dcca1efa61b"
+        },
+        {
+          "path": "scripts/makemkv.lua",
+          "sha256": "c392b1bc6aac0953c8313d0def5864424c259ca0751c80929016ad5b7f8776a7"
         },
         {
           "path": "scripts/status.lua",

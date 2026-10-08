@@ -8,9 +8,10 @@ Lumen reads [`index.json`](index.json) from this repository. Find the store unde
 
 | Plugin | Kind | Description |
 |--------|------|-------------|
-| [My AACS Plugin](plugins/my-aacs-handler) | disc libraries + native + mpv script | Encrypted Blu-rays with your MakeMKV installation or your own libaacs/libbdplus, `KEYDB.cfg` by drag and drop, DCP keys from a key file, a Blu-ray notice on screen |
+| [My AACS Plugin](plugins/my-aacs-handler) | disc libraries + native + mpv script | Encrypted Blu-rays with MakeMKV (installs it at the press of a button and keeps its beta key current) or your own libaacs/libbdplus, `KEYDB.cfg` by drag and drop, DCP keys from a key file, a Blu-ray notice on screen |
 | [Clock on screen](plugins/osd-clock) | mpv script | Ctrl+T shows the clock, time remaining and when the film ends |
 | [Disc identification](plugins/disc-identify) | mpv script | Names the disc you insert: audio CDs with album, artist, year, cover and track names (MusicBrainz), video discs with film title and year (Wikidata). Needs Lumen 0.2.1 |
+| [Auto rip](plugins/auto-rip) | mpv script | After *Start auto rip*: copies the main feature or the episodes of each disc you insert to MKV with your MakeMKV installation, names and files them for Jellyfin, Plex, Emby and Kodi, ejects the disc and goes on with the next one. Needs Lumen 1.4 and MakeMKV |
 
 <p align="center"><img src="docs/disc-identify.png" width="720" alt="An audio CD identified by the Disc identification plugin: album name and track names as chapters"></p>
 
